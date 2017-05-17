@@ -1,0 +1,33 @@
+{
+  "name": "serverless-puresec-generate-roles",
+  "version": "1.0.0",
+  "description": "Serverless plugin for PureSec generate roles.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Serverless",
+    "Amazon Web Services",
+    "AWS",
+    "Lambda",
+    "Configuration"
+  ],
+  "homepage": "https://github.com/puresec/serverless-puresec-generate-roles",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puresec/serverless-puresec-generate-roles.git"
+  },
+  "bugs": {
+    "url": "https://github.com/puresec/serverless-puresec-generate-roles/issues"
+  },
+  "author": "Oded Niv <oded.niv@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "puresec-generate-roles": "file:../puresec-generate-roles"
+  },
+  "peerDependencies": {
+    "serverless": "1.x"
+  }
+}
