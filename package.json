@@ -1,10 +1,11 @@
 {
-  "name": "serverless-puresec-generate-roles",
+  "name": "serverless-puresec-cli",
   "version": "1.0.0",
-  "description": "Serverless plugin for PureSec generate roles.",
+  "description": "Serverless plugin for PureSec CLI.",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "nopy": "nopy",
+    "install": "npip install"
   },
   "keywords": [
     "Serverless",
@@ -13,19 +14,24 @@
     "Lambda",
     "Configuration"
   ],
-  "homepage": "https://github.com/puresec/serverless-puresec-generate-roles",
+  "homepage": "https://github.com/puresec/serverless-puresec-cli",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/puresec/serverless-puresec-generate-roles.git"
+    "url": "git+https://github.com/puresec/serverless-puresec-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/puresec/serverless-puresec-generate-roles/issues"
+    "url": "https://github.com/puresec/serverless-puresec-cli/issues"
   },
-  "author": "Oded Niv <oded.niv@gmail.com>",
+  "author": "PureSec <support@puresec.io>",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "puresec-generate-roles": "file:../puresec-generate-roles"
+    "nopy": "^0.2.0"
+  },
+  "python": {
+    "dependencies": {
+      "git+ssh://git@github.com/puresec/puresec-cli.git": ""
+    }
   },
   "peerDependencies": {
     "serverless": "1.x"
