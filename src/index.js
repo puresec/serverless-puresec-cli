@@ -1,38 +1,73 @@
 'use strict';
 
 const BbPromise = require('bluebird');
-const spawn = require('child_process').spawn;
+const child_process = require('child_process');
+const nopy = require('nopy');
 
-class PureSecGenerateRoles {
+class PureSecCli {
   constructor(serverless, options) {
     this.serverless = serverless;
     this.options = options;
 
     this.commands = {
-      'puresec-gen-roles': {
-        usage: 'Generates roles for your Serverless project',
-        lifecycleEvents: [
-          'puresec-gen-roles',
-        ]
+      puresec: {
+        usage: 'Run PureSec CLI commands',
+        commands: {
+          'gen-roles': {
+            usage: 'Generate roles for your Serverless project',
+            lifecycleEvents: [
+              'puresec-gen-roles',
+            ],
+            options: {
+              function: {
+                usage: 'Only generate roles for a specific function.',
+                shortcut: 'f',
+              }
+            },
+          }
+        }
       },
     };
 
     this.hooks = {
-      'puresec-gen-roles:puresec-gen-roles': this.runGenerateRoles.bind(this),
+      'puresec:gen-roles:puresec-gen-roles': this.runGenerateRoles.bind(this),
     };
+  }
+
+  packagePath() {
+    return new BbPromise((resolve, reject) => {
+      let pwd = child_process.spawn('npm', ['explore', 'serverless-puresec-cli', '--', 'pwd']);
+      let packagePath = "";
+      pwd.stdout.on('data', (data) => packagePath += data);
+      pwd.stderr.on('data', (data) => this.serverless.cli.consoleLog(data.toString()));
+      pwd.on('error', reject);
+      pwd.on('close', (code) => code === 0 ? resolve(packagePath.trim()) : reject()); // removing newline
+    });
   }
 
   runGenerateRoles() {
     // execute the 'puresec-gen-roles' executable
-    return new BbPromise(resolve => {
-      const genroles = spawn('npm', ['explore', 'puresec-generate-roles', '--', 'npm', 'run', 'gen-roles', '--',
-        this.serverless.config.servicePath, '--framework', 'serverless',
-      ], { env: process.env });
-      genroles.stdout.on('data', (buf) => this.serverless.cli.consoleLog(buf.toString()));
-      genroles.stderr.on('data', (buf) => this.serverless.cli.consoleLog(buf.toString()));
-      genroles.on('close', () => resolve());
+    return this.packagePath().then((packagePath) => {
+      return new BbPromise((resolve, reject) => {
+        let args = [
+          '-m', 'puresec_cli', 'gen-roles',
+          this.serverless.config.servicePath, '--framework', 'serverless', '--framework-path', require.main.filename
+        ];
+        if (this.options.function) {
+          args.push('--function', this.options.function);
+        }
+
+        nopy.spawnPython(args, {
+          package: new nopy.Package(packagePath),
+          interop: "child",
+          spawn: { stdio: [0, 1, 2] }
+        }).then(puresec => {
+          puresec.on('error', reject);
+          puresec.on('close', (code) => (code === 0 || code === 1) ? resolve() : reject());
+        });
+      });
     });
   }
 }
 
-module.exports = PureSecGenerateRoles;
+module.exports = PureSecCli;
