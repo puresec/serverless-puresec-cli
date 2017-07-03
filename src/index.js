@@ -4,7 +4,7 @@ const BbPromise = require('bluebird');
 const child_process = require('child_process');
 const nopy = require('nopy');
 
-class PureSecCli {
+class PureSecCLI {
   constructor(serverless, options) {
     this.serverless = serverless;
     this.options = options;
@@ -12,6 +12,10 @@ class PureSecCli {
     this.commands = {
       puresec: {
         usage: 'Run PureSec CLI commands',
+        lifecycleEvents: [
+          'puresec',
+        ],
+
         commands: {
           'gen-roles': {
             usage: 'Generate roles for your Serverless project',
@@ -30,8 +34,16 @@ class PureSecCli {
     };
 
     this.hooks = {
+      'puresec:puresec': this.runPureSec.bind(this),
       'puresec:gen-roles:puresec-gen-roles': this.runGenerateRoles.bind(this),
     };
+  }
+
+  runPureSec() {
+    this.serverless.cli.consoleLog('* PureSec github: https://github.com/puresec/serverless-puresec-cli');
+    this.serverless.cli.consoleLog('* Pass "--help" after any <command> for contextual help');
+    this.serverless.cli.consoleLog('* Run "puresec gen-roles" to generate roles for your Serverless project');
+    return BbPromise.resolve();
   }
 
   packagePath() {
@@ -70,4 +82,4 @@ class PureSecCli {
   }
 }
 
-module.exports = PureSecCli;
+module.exports = PureSecCLI;
