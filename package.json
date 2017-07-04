@@ -1,7 +1,7 @@
 {
   "name": "serverless-puresec-cli",
   "version": "1.0.0",
-  "description": "Serverless plugin for PureSec CLI.",
+  "description": "Serverless plugin, utilizes PureSec CLI tools for improving the security of your serverless applications.",
   "main": "src/index.js",
   "scripts": {
     "nopy": "nopy",
@@ -30,7 +30,7 @@
   },
   "python": {
     "dependencies": {
-      "git+ssh://git@github.com/puresec/puresec-cli.git": ""
+      "puresec-cli": "==1.0.0"
     }
   }
 }
