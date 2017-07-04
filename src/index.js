@@ -18,15 +18,29 @@ class PureSecCLI {
 
         commands: {
           'gen-roles': {
-            usage: 'Generate roles for your Serverless project',
+            usage: "Generate roles for your Serverless project",
             lifecycleEvents: [
               'puresec-gen-roles',
             ],
             options: {
               function: {
-                usage: 'Only generate roles for a specific function.',
-                shortcut: 'f',
-              }
+                usage: "Only generate roles for a specific function.",
+                shortcut: 'f'
+              },
+
+              overwrite: { usage: "Overwrite puresec-roles.yml if already exists." },
+              'no-overwrite': { usage: "Don't overwrite puresec-roles.yml if already exists." },
+
+              reference: { usage: "Reference functions to newly created roles." },
+              'no-reference': { usage: "Don't reference functions to newly created roles." },
+
+              'remove-obsolete': { usage: "Remove obsolete roles that are no longer needed." },
+              'no-remove-obsolete': { usage: "Don't remove obsolete roles that are no longer needed." },
+
+              yes: {
+                usage: "Yes for all - overwrite files, remove old roles, etc.",
+                shortcut: 'y'
+              },
             },
           }
         }
@@ -65,9 +79,14 @@ class PureSecCLI {
           '-m', 'puresec_cli', 'gen-roles',
           this.serverless.config.servicePath, '--framework', 'serverless', '--framework-path', require.main.filename
         ];
-        if (this.options.function) {
-          args.push('--function', this.options.function);
-        }
+        if (this.options.function) args.push('--function', this.options.function);
+        if (this.options.overwrite) args.push('--overwrite');
+        if (this.options['no-overwrite']) args.push('--no-overwrite');
+        if (this.options.reference) args.push('--reference');
+        if (this.options['no-reference']) args.push('--no-reference');
+        if (this.options['remove-obsolete']) args.push('--remove-obsolete');
+        if (this.options['no-remove-obsolete']) args.push('--no-remove-obsolete');
+        if (this.options.yes) args.push('--yes');
 
         nopy.spawnPython(args, {
           package: new nopy.Package(packagePath),
