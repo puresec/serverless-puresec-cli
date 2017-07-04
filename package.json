@@ -1,6 +1,6 @@
 {
   "name": "serverless-puresec-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Serverless plugin, utilizes PureSec CLI tools for improving the security of your serverless applications.",
   "main": "src/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "Amazon Web Services",
     "AWS",
     "Lambda",
-    "Configuration"
+    "Configuration",
+    "Security"
   ],
   "homepage": "https://github.com/puresec/serverless-puresec-cli",
   "repository": {
@@ -30,7 +31,7 @@
   },
   "python": {
     "dependencies": {
-      "puresec-cli": "==1.0.0"
+      "puresec-cli": "==1.0.1"
     }
   }
 }

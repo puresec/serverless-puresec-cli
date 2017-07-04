@@ -9,7 +9,7 @@ Serverless plugin for [PureSec CLI](https://github.com/puresec/puresec-cli).
 
 ## Features
 
-* Saves you time - automatically creates IAM roles for you
+* Saves you time - magically creates IAM roles for you
 * Reduces the attack surface of your AWS Lambda based application
 * Helps creating least privileged roles with the minimum required permissions
 * Currently supported runtimes: Node.js (more runtimes coming soon...)
