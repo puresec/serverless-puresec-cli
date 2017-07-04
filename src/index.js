@@ -11,7 +11,7 @@ class PureSecCLI {
 
     this.commands = {
       puresec: {
-        usage: 'Run PureSec CLI commands',
+        usage: "PureSec CLI tools for improving the security of your serverless applications",
         lifecycleEvents: [
           'puresec',
         ],

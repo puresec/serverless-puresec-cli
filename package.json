@@ -32,8 +32,5 @@
     "dependencies": {
       "git+ssh://git@github.com/puresec/puresec-cli.git": ""
     }
-  },
-  "peerDependencies": {
-    "serverless": "1.x"
   }
 }
