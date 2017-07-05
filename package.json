@@ -1,6 +1,6 @@
 {
   "name": "serverless-puresec-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Serverless plugin, utilizes PureSec CLI tools for improving the security of your serverless applications.",
   "main": "src/index.js",
   "scripts": {
@@ -27,11 +27,11 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "nopy": "^0.2.0"
+    "nopy": "odedniv/nopy#python3-patch"
   },
   "python": {
     "dependencies": {
-      "puresec-cli": "==1.0.1"
+      "puresec-cli": "==1.0.2"
     }
   }
 }

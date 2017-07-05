@@ -16,6 +16,11 @@ Serverless plugin for [PureSec CLI](https://github.com/puresec/puresec-cli).
 * Currently supported services: DynamoDB, Kinesis, KMS, S3, SES, SNS & Step Functions
 * Works with the [Serverless Framework](https://github.com/serverless/serverless)
 
+## Requirements
+
+* Python 3.4+
+* NodeJS 6+
+
 ## Quick Start
 
 **1. Install via npm:**
