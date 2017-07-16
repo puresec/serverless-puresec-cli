@@ -12,8 +12,8 @@ Serverless plugin for [PureSec CLI](https://github.com/puresec/puresec-cli).
 * Saves you time - magically creates IAM roles for you
 * Reduces the attack surface of your AWS Lambda based application
 * Helps creating least privileged roles with the minimum required permissions
-* Currently supported runtimes: Node.js (more runtimes coming soon...)
-* Currently supported services: DynamoDB, Kinesis, KMS, S3, SES, SNS & Step Functions
+* Currently supported runtimes: Node.js, Python (more runtimes coming soon...)
+* Currently supported services: DynamoDB, Kinesis, KMS, Lambda, S3, SES, SNS & Step Functions
 * Works with the [Serverless Framework](https://github.com/serverless/serverless)
 
 ## Requirements
