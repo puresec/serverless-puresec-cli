@@ -58,11 +58,11 @@ Generate the IAM role for your function.
 serverless puresec gen-roles --function myFunction
 ```
 
-After receiving the IAM role in the output of tool:
+After receiving the IAM role in the output of the tool:
 
 1. Validate the role. Make sure you have all the required permissions and only them.
 2. Copy-paste it to the Resources section in your serverless.yml file.
-3. Connect the generated Role by adding the ***role***property to your function in the serverless.yml.
+3. Connect the generated Role by adding the**role**property to your function in the serverless.yml.
 
 **5. You can also execute the tool on the entire project:**
 
