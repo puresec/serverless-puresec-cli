@@ -3,6 +3,7 @@
 const BbPromise = require('bluebird');
 const child_process = require('child_process');
 const nopy = require('nopy');
+const path = require('path');
 
 class PureSecCLI {
   constructor(serverless, options) {
@@ -74,27 +75,31 @@ class PureSecCLI {
   runGenerateRoles() {
     // execute the 'puresec-gen-roles' executable
     return this.packagePath().then((packagePath) => {
-      return new BbPromise((resolve, reject) => {
-        let args = [
-          '-m', 'puresec_cli', 'gen-roles',
-          this.serverless.config.servicePath, '--framework', 'serverless', '--framework-path', require.main.filename
-        ];
-        if (this.options.function) args.push('--function', this.options.function);
-        if (this.options.overwrite) args.push('--overwrite');
-        if (this.options['no-overwrite']) args.push('--no-overwrite');
-        if (this.options.reference) args.push('--reference');
-        if (this.options['no-reference']) args.push('--no-reference');
-        if (this.options['remove-obsolete']) args.push('--remove-obsolete');
-        if (this.options['no-remove-obsolete']) args.push('--no-remove-obsolete');
-        if (this.options.yes) args.push('--yes');
+      return this.serverless.pluginManager.spawn('package').then(() => {
+        return new BbPromise((resolve, reject) => {
+          let args = [
+            '-m', 'puresec_cli', 'gen-roles',
+            this.serverless.config.servicePath || '.',
+            '--framework', 'serverless',
+            '--framework-output', path.join(this.serverless.config.servicePath || '.', '.serverless'),
+          ];
+          if (this.options.function) args.push('--function', this.options.function);
+          if (this.options.overwrite) args.push('--overwrite');
+          if (this.options['no-overwrite']) args.push('--no-overwrite');
+          if (this.options.reference) args.push('--reference');
+          if (this.options['no-reference']) args.push('--no-reference');
+          if (this.options['remove-obsolete']) args.push('--remove-obsolete');
+          if (this.options['no-remove-obsolete']) args.push('--no-remove-obsolete');
+          if (this.options.yes) args.push('--yes');
 
-        nopy.spawnPython(args, {
-          package: new nopy.Package(packagePath),
-          interop: "child",
-          spawn: { stdio: [0, 1, 2] }
-        }).then(puresec => {
-          puresec.on('error', reject);
-          puresec.on('close', (code) => (code === 0 || code === 1) ? resolve() : reject());
+          nopy.spawnPython(args, {
+            package: new nopy.Package(packagePath),
+            interop: "child",
+            spawn: { stdio: [0, 1, 2] }
+          }).then(puresec => {
+            puresec.on('error', reject);
+            puresec.on('close', (code) => (code === 0 || code === 1) ? resolve() : reject());
+          });
         });
       });
     });
