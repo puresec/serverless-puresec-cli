@@ -3,7 +3,7 @@
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![npm version](https://badge.fury.io/js/serverless-puresec-cli.svg)](https://badge.fury.io/js/serverless-puresec-cli)
 
-[Website](https://www.puresec.io/) • [Newsletter](http://eepurl.com/cPu0_b) • [Slack](http://slack-signup.puresec.io) • [Twitter](https://twitter.com/PureSecTeam/)
+[Website](https://www.puresec.io/) • [Newsletter](http://eepurl.com/cPu0_b) • [Twitter](https://twitter.com/PureSecTeam/)
 
 Serverless plugin for [PureSec CLI](https://github.com/puresec/puresec-cli).
 
@@ -11,7 +11,7 @@ Serverless plugin for [PureSec CLI](https://github.com/puresec/puresec-cli).
 
 * Saves you time - magically creates IAM roles for you
 * Reduces the attack surface of your AWS Lambda based application
-* Helps creating least privileged roles with the minimum required permissions
+* Helps create least privileged roles with the minimum required permissions
 * Currently supported runtimes: Node.js, Python (more runtimes coming soon...)
 * Currently supported services: DynamoDB, Kinesis, KMS, Lambda, S3, SES, SNS & Step Functions
 * Works with the [Serverless Framework](https://github.com/serverless/serverless)
@@ -50,25 +50,29 @@ serverless
 
 the console should display **puresec** as one of the plugins now available in your Serverless project.
 
-**4. Start using serverless-puresec-cli:**
+**4. Start using the tool:**
 
-Generate roles for your entire project.
-
-```bash
-serverless puresec gen-roles
-```
-
-The tool will ask you a few questions and then do its best to generate least privileged IAM roles.
-
-**5. You can try the tool by executing it on a single function**:
+Generate the IAM role for your function.
 
 ```bash
 serverless puresec gen-roles --function myFunction
 ```
 
+After receiving the IAM role in the output of the tool:
+
+1. Validate the role. Make sure you have all the required permissions and only them.
+2. Copy-paste it to the Resources section in your serverless.yml file.
+3. Connect the generated Role by adding the **role** property to your function in the serverless.yml.
+
+**5. You can also execute the tool on the entire project:**
+
+```bash
+serverless puresec gen-roles
+```
+
+
 ## Links
 
 * [Website](https://www.puresec.io/) (Our main product is still in closed beta)
 * [Newsletter](http://eepurl.com/cPu0_b)
-* [Slack](http://slack-signup.puresec.io)
 * [Twitter](https://twitter.com/PureSecTeam/)
