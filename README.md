@@ -73,6 +73,6 @@ serverless puresec gen-roles
 
 ## Links
 
-* [Website](https://www.puresec.io/) (Our main product is still in closed beta)
+* [Website](https://www.puresec.io/)
 * [Newsletter](http://eepurl.com/cPu0_b)
 * [Twitter](https://twitter.com/PureSecTeam/)
