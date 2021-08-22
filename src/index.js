@@ -26,21 +26,23 @@ class PureSecCLI {
             options: {
               function: {
                 usage: "Only generate roles for a specific function.",
-                shortcut: 'f'
+                shortcut: 'f',
+                type: 'string'
               },
 
-              overwrite: { usage: "Overwrite puresec-roles.yml if already exists." },
-              'no-overwrite': { usage: "Don't overwrite puresec-roles.yml if already exists." },
+              overwrite: { usage: "Overwrite puresec-roles.yml if already exists.", type: 'string' },
+              'no-overwrite': { usage: "Don't overwrite puresec-roles.yml if already exists.", type: 'string' },
 
-              reference: { usage: "Reference functions to newly created roles." },
-              'no-reference': { usage: "Don't reference functions to newly created roles." },
+              reference: { usage: "Reference functions to newly created roles.", type: 'string' },
+              'no-reference': { usage: "Don't reference functions to newly created roles.", type: 'string' },
 
-              'remove-obsolete': { usage: "Remove obsolete roles that are no longer needed." },
-              'no-remove-obsolete': { usage: "Don't remove obsolete roles that are no longer needed." },
+              'remove-obsolete': { usage: "Remove obsolete roles that are no longer needed.", type: 'string' },
+              'no-remove-obsolete': { usage: "Don't remove obsolete roles that are no longer needed.", type: 'string' },
 
               yes: {
                 usage: "Yes for all - overwrite files, remove old roles, etc.",
-                shortcut: 'y'
+                shortcut: 'y',
+                type: 'string'
               },
             },
           }
